@@ -74,6 +74,17 @@ public final class MovieList {
 
         };
 
+        Movie.MovieCategory categories[][] = {
+                {Movie.MovieCategory.ACTION},
+                {Movie.MovieCategory.ACTION},
+                {Movie.MovieCategory.ACTION},
+                {Movie.MovieCategory.ACTION},
+                {Movie.MovieCategory.ACTION}
+        };
+        int duration[] = {
+                120, 120, 120, 120, 120
+        };
+
         for (int index = 0; index < title.length; ++index) {
             list.add(
                     buildMovieInfo(
@@ -83,8 +94,10 @@ public final class MovieList {
                             videoUrl[index],
                             cardImageUrl[index],
                             bgImageUrl[index],
+                            languages[index],
                             subtitles[index],
-                            languages[index]));
+                            categories[index],
+                            duration[index]));
         }
 
         return list;
@@ -96,7 +109,11 @@ public final class MovieList {
             String studio,
             String videoUrl,
             String cardImageUrl,
-            String backgroundImageUrl, String[] languages, String[] subtitles) {
+            String backgroundImageUrl,
+            String[] languages,
+            String[] subtitles,
+            Movie.MovieCategory[] categories,
+            int duration) {
         Movie movie = new Movie();
         movie.setId(count++);
         movie.setTitle(title);
@@ -107,6 +124,8 @@ public final class MovieList {
         movie.setVideoUrl(videoUrl);
         movie.setLanguages(languages);
         movie.setSubtitles(subtitles);
+        movie.setCategories(categories);
+        movie.setDuration(duration);
         return movie;
     }
 }
