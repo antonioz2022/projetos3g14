@@ -64,6 +64,16 @@ public final class MovieList {
                 "https://commondatastorage.googleapis.com/android-tv/Sample%20videos/April%20Fool's%202013/Introducing%20Google%20Nose/card.jpg"
         };
 
+        String subtitles[][] = { {"english", "portuguese"}, {"english", "portuguese"},
+                {"english", "portuguese"}, {"english", "portuguese"}, {"english", "portuguese"}
+
+        };
+
+        String languages[][] = { {"english", "portuguese"}, {"english", "portuguese"},
+                {"english", "portuguese"}, {"english", "portuguese"}, {"english", "portuguese"}
+
+        };
+
         for (int index = 0; index < title.length; ++index) {
             list.add(
                     buildMovieInfo(
@@ -72,7 +82,9 @@ public final class MovieList {
                             studio[index],
                             videoUrl[index],
                             cardImageUrl[index],
-                            bgImageUrl[index]));
+                            bgImageUrl[index],
+                            subtitles[index],
+                            languages[index]));
         }
 
         return list;
@@ -84,7 +96,7 @@ public final class MovieList {
             String studio,
             String videoUrl,
             String cardImageUrl,
-            String backgroundImageUrl) {
+            String backgroundImageUrl, String[] languages, String[] subtitles) {
         Movie movie = new Movie();
         movie.setId(count++);
         movie.setTitle(title);
@@ -93,6 +105,8 @@ public final class MovieList {
         movie.setCardImageUrl(cardImageUrl);
         movie.setBackgroundImageUrl(backgroundImageUrl);
         movie.setVideoUrl(videoUrl);
+        movie.setLanguages(languages);
+        movie.setSubtitles(subtitles);
         return movie;
     }
 }

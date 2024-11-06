@@ -14,8 +14,22 @@ public class Movie implements Serializable {
     private String cardImageUrl;
     private String videoUrl;
     private String studio;
+    private String[] languages;
+    private String[] subtitles;
 
     public Movie() {
+    }
+
+    public Movie(long id, String title, String description, String bgImageUrl, String cardImageUrl, String videoUrl, String studio, String[] languages, String[] subtitles) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.bgImageUrl = bgImageUrl;
+        this.cardImageUrl = cardImageUrl;
+        this.videoUrl = videoUrl;
+        this.studio = studio;
+        this.languages = languages;
+        this.subtitles = subtitles;
     }
 
     public long getId() {
@@ -28,6 +42,22 @@ public class Movie implements Serializable {
 
     public String getTitle() {
         return title;
+    }
+
+    public String[] getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(String[] languages) {
+        this.languages = languages;
+    }
+
+    public String[] getSubtitles() {
+        return subtitles;
+    }
+
+    public void setSubtitles(String[] subtitles) {
+        this.subtitles = subtitles;
     }
 
     public void setTitle(String title) {
@@ -82,6 +112,8 @@ public class Movie implements Serializable {
                 ", videoUrl='" + videoUrl + '\'' +
                 ", backgroundImageUrl='" + bgImageUrl + '\'' +
                 ", cardImageUrl='" + cardImageUrl + '\'' +
+                ", languages=" + String.join(", ", languages) +
+                ", subtitles=" + String.join(", ", subtitles) +
                 '}';
     }
 }
