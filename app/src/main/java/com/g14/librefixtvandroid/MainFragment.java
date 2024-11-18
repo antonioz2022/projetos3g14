@@ -93,7 +93,7 @@ public class MainFragment extends BrowseSupportFragment {
             }
             ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
             for (int j = 0; j < NUM_COLS; j++) {
-                listRowAdapter.add(list.get(j % 5));
+                listRowAdapter.add(list.get(j % list.size()));
             }
             HeaderItem header = new HeaderItem(i, MovieList.MOVIE_CATEGORY[i]);
             rowsAdapter.add(new ListRow(header, listRowAdapter));
@@ -124,15 +124,15 @@ public class MainFragment extends BrowseSupportFragment {
     private void setupUIElements() {
         // setBadgeDrawable(getActivity().getResources().getDrawable(
         // R.drawable.videos_by_google_banner));
-        setTitle(getString(R.string.browse_title)); // Badge, when set, takes precedent
+        setBadgeDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.logo1)); // Badge, when set, takes precedent
         // over title
         setHeadersState(HEADERS_ENABLED);
         setHeadersTransitionOnBackEnabled(true);
 
         // set fastLane (or headers) background color
-        setBrandColor(ContextCompat.getColor(getActivity(), R.color.fastlane_background));
+        setBrandColor(ContextCompat.getColor(getActivity(), R.color.default_background));
         // set search icon color
-        setSearchAffordanceColor(ContextCompat.getColor(getActivity(), R.color.search_opaque));
+        setSearchAffordanceColor(ContextCompat.getColor(getActivity(), R.color.fastlane_background));
     }
 
     private void setupEventListeners() {
