@@ -79,7 +79,7 @@ public class SearchActivity extends FragmentActivity implements SearchSupportFra
         if (filteredMovies.isEmpty()) {
             Toast.makeText(this, "No results found.", Toast.LENGTH_SHORT).show();
         } else {
-            ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new MovieCardPresenter());
+            ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new CardPresenter());
             listRowAdapter.addAll(0, filteredMovies);
             mRowsAdapter.add(new ListRow(listRowAdapter));
         }
