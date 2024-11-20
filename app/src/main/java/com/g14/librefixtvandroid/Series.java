@@ -8,8 +8,8 @@ public class Series extends Movie {
     public Series() {
     }
 
-    public Series(long id, String title, String description, String bgImageUrl, String cardImageUrl, String videoUrl, String studio, String[] languages, String[] subtitles, List<Season> seasons, MovieCategory[] categories, int duration) {
-        super(id, title, description, bgImageUrl, cardImageUrl, videoUrl, studio, languages, subtitles, categories, duration);
+    public Series(long id, String title, String description, String bgImageUrl, String cardImageUrl, String videoUrl, String studio, String[] languages, String[] subtitles, List<Season> seasons, MovieCategory[] categories, int duration, MovieRating rating, int release_year) {
+        super(id, title, description, bgImageUrl, cardImageUrl, videoUrl, studio, languages, subtitles, categories, duration, rating, release_year);
         this.seasons = seasons;
     }
 

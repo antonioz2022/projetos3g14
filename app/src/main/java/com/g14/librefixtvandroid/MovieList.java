@@ -85,6 +85,17 @@ public final class MovieList {
                 120, 120, 120, 120, 120
         };
 
+        Movie.MovieRating rating[] = {
+                Movie.MovieRating.PG,
+                Movie.MovieRating.PG,
+                Movie.MovieRating.PG,
+                Movie.MovieRating.PG,
+                Movie.MovieRating.PG
+        };
+        int release_year[] = {
+                2017, 2018, 2019, 2020, 2021
+        };
+
         for (int index = 0; index < title.length; ++index) {
             list.add(
                     buildMovieInfo(
@@ -97,7 +108,9 @@ public final class MovieList {
                             languages[index],
                             subtitles[index],
                             categories[index],
-                            duration[index]));
+                            duration[index],
+                            rating[index],
+                            release_year[index]));
         }
 
         return list;
@@ -113,7 +126,9 @@ public final class MovieList {
             String[] languages,
             String[] subtitles,
             Movie.MovieCategory[] categories,
-            int duration) {
+            int duration,
+            Movie.MovieRating rating,
+            int release_year) {
         Movie movie = new Movie();
         movie.setId(count++);
         movie.setTitle(title);
@@ -126,6 +141,8 @@ public final class MovieList {
         movie.setSubtitles(subtitles);
         movie.setCategories(categories);
         movie.setDuration(duration);
+        movie.setRating(rating);
+        movie.setRelease_year(release_year);
         return movie;
     }
 }

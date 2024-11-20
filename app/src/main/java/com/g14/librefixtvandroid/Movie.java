@@ -24,9 +24,29 @@ public class Movie implements Serializable {
         MYSTERY
     }
 
+    public enum MovieRating {
+        G("General Audience"),
+        PG("Parental Guidance Suggested"),
+        PG_13("Parents Strongly Cautioned"),
+        R("Restricted"),
+        NC_17("Adults Only");
+
+        private final String description;
+
+        MovieRating(String description) {
+            this.description = description;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+    }
+
     static final long serialVersionUID = 727566175075960653L;
     private long id;
     private MovieCategory[] categories;
+    private int release_year;
+    private MovieRating rating;
     private int duration;
     private String title;
     private String description;
@@ -40,7 +60,7 @@ public class Movie implements Serializable {
     public Movie() {
     }
 
-    public Movie(long id, String title, String description, String bgImageUrl, String cardImageUrl, String videoUrl, String studio, String[] languages, String[] subtitles, MovieCategory[] categories, int duration) {
+    public Movie(long id, String title, String description, String bgImageUrl, String cardImageUrl, String videoUrl, String studio, String[] languages, String[] subtitles, MovieCategory[] categories, int duration, MovieRating rating, int release_year) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -52,12 +72,21 @@ public class Movie implements Serializable {
         this.subtitles = subtitles;
         this.categories = categories;
         this.duration = duration;
+        this.rating = rating;
+        this.release_year = release_year;
     }
 
     public long getId() {
         return id;
     }
 
+    public int getRelease_year() {
+        return release_year;
+    }
+
+    public void setRelease_year(int release_year){
+        this.release_year = release_year;
+    }
     public void setId(long id) {
         this.id = id;
     }
@@ -80,6 +109,14 @@ public class Movie implements Serializable {
 
     public void setCategories(MovieCategory[] categories) {
         this.categories = categories;
+    }
+
+    public MovieRating getRating() {
+        return rating;
+    }
+
+    public void setRating(MovieRating rating) {
+        this.rating = rating;
     }
 
     public String[] getLanguages() {
@@ -154,6 +191,8 @@ public class Movie implements Serializable {
                 ", subtitles=" + String.join(", ", subtitles) +
                 ", categories=" + getCategories() +
                 ", duration=" + getDuration() + " minutes" +
+                ", rating=" + (rating != null ? rating + " (" + rating.getDescription() + ")" : "Not Rated") +
+                ", release_year=" + getRelease_year()+
                 '}';
     }
 }
