@@ -32,6 +32,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.MultiTransformation;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 
@@ -49,8 +52,8 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
     private static final int ACTION_RENT = 2;
     private static final int ACTION_BUY = 3;
 
-    private static final int DETAIL_THUMB_WIDTH = 274;
-    private static final int DETAIL_THUMB_HEIGHT = 274;
+    private static final int DETAIL_THUMB_WIDTH = 674;
+    private static final int DETAIL_THUMB_HEIGHT = 674;
 
     private static final int NUM_COLS = 10;
 
@@ -111,7 +114,8 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
         int height = convertDpToPixel(getActivity().getApplicationContext(), DETAIL_THUMB_HEIGHT);
         Glide.with(getActivity())
                 .load(mSelectedMovie.getCardImageUrl())
-                .centerCrop()
+                .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners(
+                        convertDpToPixel(getActivity().getApplicationContext(), 20))))
                 .error(R.drawable.default_background)
                 .into(new SimpleTarget<Drawable>(width, height) {
                     @Override
@@ -122,6 +126,7 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
                         mAdapter.notifyArrayItemRangeChanged(0, mAdapter.size());
                     }
                 });
+
 
         ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
 
@@ -204,9 +209,10 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
                 Row row) {
 
             if (item instanceof Movie) {
+                Movie movie = (Movie) item;
                 Log.d(TAG, "Item: " + item.toString());
                 Intent intent = new Intent(getActivity(), DetailsActivity.class);
-                intent.putExtra(getResources().getString(R.string.movie), mSelectedMovie);
+                intent.putExtra(getResources().getString(R.string.movie), movie);
 
                 Bundle bundle =
                         ActivityOptionsCompat.makeSceneTransitionAnimation(

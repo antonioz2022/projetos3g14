@@ -5,4 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailsActivity"
-    tools:deviceIds="tv" />
+    tools:deviceIds="tv">
+
+    <!-- ImageCardView that holds the image in DetailsOverviewRow -->
+    <androidx.leanback.widget.ImageCardView
+        android:id="@+id/details_image"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/error_fragment_message" />
+
+    <!-- You can add more views here for other details like title, description, etc. -->
+</FrameLayout>
