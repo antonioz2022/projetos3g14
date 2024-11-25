@@ -113,6 +113,32 @@ public final class MovieList {
                             release_year[index]));
         }
 
+        // Adding a Series
+        List<Season> seasons = new ArrayList<>();
+        List<Episode> episodes = new ArrayList<>();
+        Episode ep1 = new Episode("The crash", 44, "The plane crashes into the sea", "https://commondatastorage.googleapis.com/android-tv/Sample%20videos/Zeitgeist/Zeitgeist%202010_%20Year%20in%20Review.mp4");
+        Episode ep2 = new Episode("The crash 2", 44, "Can they survive the crash ?", "https://commondatastorage.googleapis.com/android-tv/Sample%20videos/Zeitgeist/Zeitgeist%202010_%20Year%20in%20Review.mp4");
+        episodes.add(ep1);
+        episodes.add(ep2);
+        seasons.add(new Season(1, episodes));
+        Series series = new Series(
+                count++,
+                "My Awesome Series",
+                "An exciting series full of twists and turns.",
+                "https://commondatastorage.googleapis.com/android-tv/Sample%20videos/Zeitgeist/Zeitgeist%202010_%20Year%20in%20Review/bg.jpg",
+                "https://i.pinimg.com/originals/cf/e1/31/cfe13104988d43169ce6a5b0040ad8be.jpg",
+                "https://commondatastorage.googleapis.com/android-tv/Sample%20videos/Zeitgeist/Zeitgeist%202010_%20Year%20in%20Review.mp4",
+                "Studio Series",
+                new String[]{"english", "spanish"},
+                new String[]{"english", "spanish"},
+                seasons,
+                new Movie.MovieCategory[]{Movie.MovieCategory.DRAMA},
+                0, // Duration isn't typically applicable to Series
+                Movie.MovieRating.PG,
+                2022
+        );
+        list.add(series);
+
         return list;
     }
 

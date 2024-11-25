@@ -1,6 +1,9 @@
 package com.g14.librefixtvandroid;
 
-public class Episode {
+import java.io.Serializable;
+
+public class Episode implements Serializable {
+    private static final long serialVersionUID = 727566175075960653L;
     private String title;
     private int duration;  // Duration in minutes
     private String description;

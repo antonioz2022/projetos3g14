@@ -5,12 +5,9 @@
     <string name="grid_view">Grid View</string>
     <string name="error_fragment">Error Fragment</string>
     <string name="personal_settings">Personal Settings</string>
-    <string name="watch_trailer_1">Watch trailer</string>
-    <string name="watch_trailer_2">FREE</string>
-    <string name="rent_1">Assistir</string>
-    <string name="rent_2">FREE</string>
-    <string name="buy_1">Favoritar</string>
-    <string name="buy_2">xxxxx</string>
+    <string name="seasons">Seasons</string>
+    <string name="watch">Assistir</string>
+    <string name="fav">Favoritar</string>
     <string name="movie">Movie</string>
     <string name="serie">Serie</string>
 

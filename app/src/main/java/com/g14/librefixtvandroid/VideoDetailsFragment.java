@@ -49,8 +49,7 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
     private static final String TAG = "VideoDetailsFragment";
 
     private static final int ACTION_WATCH_TRAILER = 1;
-    private static final int ACTION_RENT = 2;
-    private static final int ACTION_BUY = 3;
+    private static final int ACTION_SEASONS = 2;
 
     private static final int DETAIL_THUMB_WIDTH = 674;
     private static final int DETAIL_THUMB_HEIGHT = 674;
@@ -130,21 +129,18 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
 
         ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
 
-        actionAdapter.add(
-                new Action(
-                        ACTION_WATCH_TRAILER,
-                        getResources().getString(R.string.watch_trailer_1),
-                        getResources().getString(R.string.watch_trailer_2)));
-        actionAdapter.add(
-                new Action(
-                        ACTION_RENT,
-                        getResources().getString(R.string.rent_1),
-                        getResources().getString(R.string.rent_2)));
-        actionAdapter.add(
-                new Action(
-                        ACTION_BUY,
-                        getResources().getString(R.string.buy_1),
-                        getResources().getString(R.string.buy_2)));
+        if (mSelectedMovie instanceof Series) {
+            actionAdapter.add(
+                    new Action(
+                            ACTION_SEASONS,
+                            getResources().getString(R.string.seasons)));
+        }
+        else{
+            actionAdapter.add(
+                    new Action(
+                            ACTION_WATCH_TRAILER,
+                            getResources().getString(R.string.watch)));
+        }
         row.setActionsAdapter(actionAdapter);
 
         mAdapter.add(row);
