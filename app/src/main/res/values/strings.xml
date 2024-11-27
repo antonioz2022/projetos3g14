@@ -11,6 +11,24 @@
     <string name="movie">Movie</string>
     <string name="serie">Serie</string>
 
+    <string name="welcome">Welcome</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="logo_desc">Logo of Librefix</string>
+    <string name="qr_code_desc">QR Code for Login or Signup</string>
+    <string name="fill_all_fields">Please fill in all fields</string>
+    <string name="signup_successful">Signup successful!</string>
+    <string name="login_successful">Login successful!</string>
+    <string name="invalid_email_password">Invalid email or password</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+
+    <string name="hello">Olá,</string>
+    <string name="libre">Libre</string>
+    <string name="glad_to_see_you">Que bom te ver por aqui!</string>
+    <string name="signup_instruction">Para se cadastrar e se tornar libre, utilize o seu celular ou computador e leia o QR CODE</string>
+    <string name="login_instruction">Utilize o QR Code pra acessar sua conta ou o e-mail e senha cadastrados</string>
+
     <!-- Error messages -->
     <string name="error_fragment_message">An error occurred</string>
     <string name="dismiss_error">Dismiss</string>
