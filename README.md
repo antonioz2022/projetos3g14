@@ -10,8 +10,11 @@ O projeto busca trazer o Libreflix para Android TV, oferecendo uma versão otimi
 
 ## 📋 Equipe
 
+###  :computer: Desenvolvedores
 - **Antonio Albuquerque de Oliveira Neto** - [aaon@cesar.school](mailto:aaon@cesar.school)
 - **George Diogenes Pessoa Filho** - [gdpf@cesar.school](mailto:gdpf@cesar.school)
+
+### Designers
 
 ## 📜 Licença
 
