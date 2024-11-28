@@ -1,9 +1,7 @@
 <resources>
 
     <!-- Tema principal do aplicativo -->
-    <style name="Theme.LibrefixTvAndroid" parent="@style/Theme.Leanback">
-        <item name="android:background">#000000</item>
-    </style>
+    <style name="Theme.LibrefixTvAndroid" parent="@style/Theme.Leanback"></style>
 
     <!-- Estilo para o título do filme -->
     <style name="MovieTitleStyle">
