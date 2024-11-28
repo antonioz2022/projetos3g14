@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000">
+
+    <!-- Container para Fragmentos -->
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Filmes Assistidos"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#FFF" />
+
+                <!-- RecyclerView para lista de filmes assistidos -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/watched_movies_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Filmes Favoritos"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#FFF"
+                    android:layout_marginTop="16dp" />
+
+                <!-- RecyclerView para lista de filmes favoritos -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/favorite_movies_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </ScrollView>
+
+    </FrameLayout>
+</FrameLayout>

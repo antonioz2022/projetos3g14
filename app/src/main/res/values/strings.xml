@@ -11,6 +11,8 @@
     <string name="mark_as_watched">Já Vi</string>
     <string name="movie">Movie</string>
     <string name="serie">Serie</string>
+    <string name="profile_icon_desc">Profile Icon</string>
+    <string name="search_icon_desc">Search Icon</string>
 
     <string name="welcome">Boas Vindas</string>
     <string name="login">Login</string>
