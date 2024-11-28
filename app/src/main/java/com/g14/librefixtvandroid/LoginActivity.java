@@ -24,8 +24,18 @@ public class LoginActivity extends Activity {
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         Button buttonLogin = findViewById(R.id.buttonLogin);
+        Button buttonSkip = findViewById(R.id.buttonSkip);
 
         sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+
+        buttonSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
