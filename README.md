@@ -7,3 +7,12 @@ O Libreflix é uma plataforma gratuita e colaborativa que oferece filmes, série
 # :bulb: Projeto
 
 O projeto busca trazer o Libreflix para Android TV, oferecendo uma versão otimizada da plataforma para dispositivos de TV. O objetivo é proporcionar uma experiência de streaming de conteúdo livre e gratuito, com uma interface adaptada para telas grandes, permitindo que os usuários assistam filmes, séries e documentários diretamente na TV.
+
+## 📋 Equipe
+
+- **Antonio Albuquerque de Oliveira Neto** - [aaon@cesar.school](mailto:aaon@cesar.school)
+- **George Diogenes Pessoa Filho** - [gdpf@cesar.school](mailto:gdpf@cesar.school)
+
+## 📜 Licença
+
+Este projeto está licenciado sob a [Licença MIT](LICENSE).
