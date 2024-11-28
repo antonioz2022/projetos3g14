@@ -14,6 +14,7 @@ O projeto busca trazer o Libreflix para Android TV, oferecendo uma versão otimi
 - **Antonio Albuquerque de Oliveira Neto** - [aaon@cesar.school](mailto:aaon@cesar.school)
 - **George Diogenes Pessoa Filho** - [gdpf@cesar.school](mailto:gdpf@cesar.school)
 - **João Victor Lemos Nunes** - [jvln@cesar.school](mailto:jvln@cesar.school)
+- - **Luiz Felipe Pessoa de Arruda** - [lfpa@cesar.school](mailto:lfpa@cesar.school)
 
 ### 🖌️ Designers
 
