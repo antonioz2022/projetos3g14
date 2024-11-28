@@ -50,6 +50,8 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
     private static final int ACTION_WATCH_TRAILER = 1;
     private static final int ACTION_SEASONS = 2;
     private static final int ACTION_WATCHED = 3;
+    private static final int ACTION_SHARE = 4;
+    private static final int ACTION_ADD_TO_FAVORITES = 5;
 
     private static final int DETAIL_THUMB_WIDTH = 674;
     private static final int DETAIL_THUMB_HEIGHT = 674;
@@ -132,12 +134,18 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
             actionAdapter.add(new Action(ACTION_WATCH_TRAILER, getResources().getString(R.string.watch)));
         }
 
-        // Crie a ação para "assistido" com o ícone apropriado, se necessário
+        // Adiciona a ação de "Assistido"
         Action watchedAction = new Action(ACTION_WATCHED, getResources().getString(R.string.mark_as_watched));
         if (mSelectedMovie.isWatched()) {
             watchedAction.setIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_check));
         }
         actionAdapter.add(watchedAction);
+
+        // Adiciona uma ação de "Compartilhar"
+        actionAdapter.add(new Action(ACTION_SHARE, getResources().getString(R.string.share)));
+
+        // Adiciona uma ação de "Adicionar aos Favoritos"
+        actionAdapter.add(new Action(ACTION_ADD_TO_FAVORITES, getResources().getString(R.string.add_to_favorites)));
 
         row.setActionsAdapter(actionAdapter);
         mAdapter.add(row);
@@ -171,6 +179,13 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
                         action.setIcon(null);
                     }
                     mAdapter.notifyArrayItemRangeChanged(0, mAdapter.size());
+                } else if (action.getId() == ACTION_SHARE) {
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, "Confira este filme: " + mSelectedMovie.getTitle());
+                    startActivity(Intent.createChooser(shareIntent, "Compartilhar via"));
+                } else if (action.getId() == ACTION_ADD_TO_FAVORITES) {
+                    Toast.makeText(getActivity(), "Adicionado aos favoritos!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), action.toString(), Toast.LENGTH_SHORT).show();
                 }

@@ -29,7 +29,8 @@
     <string name="glad_to_see_you">Que bom te ver por aqui!</string>
     <string name="signup_instruction">Para se cadastrar e se tornar libre, utilize o seu celular ou computador e leia o QR CODE</string>
     <string name="login_instruction">Utilize o QR Code pra acessar sua conta ou o e-mail e senha cadastrados</string>
-
+    <string name="share">Compartilhar</string>
+    <string name="add_to_favorites">Adicionar aos Favoritos</string>
     <!-- Error messages -->
     <string name="error_fragment_message">An error occurred</string>
     <string name="dismiss_error">Dismiss</string>
