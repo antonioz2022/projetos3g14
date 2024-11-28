@@ -17,6 +17,9 @@ O projeto busca trazer o Libreflix para Android TV, oferecendo uma versão otimi
 
 ### 🖌️ Designers
 
+## :link: Links
+
+
 ## 📜 Licença
 
 Este projeto está licenciado sob a [Licença MIT](LICENSE).
