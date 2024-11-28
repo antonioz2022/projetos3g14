@@ -4,7 +4,7 @@
     android:id="@+id/details_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_dark"
+    android:background="#000000"
     tools:context=".DetailsActivity"
     tools:deviceIds="tv">
 
@@ -14,8 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:contentDescription="@string/details_background_desc"
+        android:contentDescription="Fundo da tela de detalhes"
         android:src="@drawable/default_background" />
+
 
     <!-- Conteúdo principal -->
     <ScrollView
@@ -35,7 +36,7 @@
                 android:layout_height="300dp"
                 android:layout_marginBottom="16dp"
                 android:scaleType="centerCrop"
-                android:contentDescription="@string/movie_poster" />
+                android:contentDescription="Imagem do pôster do filme" />
 
             <!-- Título do filme -->
             <TextView
