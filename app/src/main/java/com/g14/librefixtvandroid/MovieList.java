@@ -5,12 +5,19 @@ import java.util.List;
 
 public final class MovieList {
     public static final String MOVIE_CATEGORY[] = {
-            "Ficção",
-            "Educação",
-            "Tech",
-            "Animação",
-            "Musica",
-            "Social",
+            Movie.MovieCategory.SOCIAL.getText(),
+            Movie.MovieCategory.TECH.getText(),
+            Movie.MovieCategory.MUSICA.getText(),
+            Movie.MovieCategory.SCI_FI.getText(),
+            Movie.MovieCategory.ATIVISMO.getText(),
+            Movie.MovieCategory.VEGANISMO.getText(),
+            Movie.MovieCategory.FEMINISMO.getText(),
+            Movie.MovieCategory.EDUCAÇÃO.getText(),
+            Movie.MovieCategory.ANIMAÇÂO.getText(),
+            Movie.MovieCategory.COMÈDIA.getText(),
+            Movie.MovieCategory.RELIGIÃO.getText(),
+            Movie.MovieCategory.NATUREZA.getText(),
+            Movie.MovieCategory.OCUPAÇÂO.getText()
     };
 
     private static List<Movie> list;
@@ -75,11 +82,11 @@ public final class MovieList {
         };
 
         Movie.MovieCategory categories[][] = {
-                {Movie.MovieCategory.ACTION},
-                {Movie.MovieCategory.ACTION},
-                {Movie.MovieCategory.ACTION},
-                {Movie.MovieCategory.ACTION},
-                {Movie.MovieCategory.ACTION}
+                {Movie.MovieCategory.SOCIAL},
+                {Movie.MovieCategory.SOCIAL},
+                {Movie.MovieCategory.SOCIAL},
+                {Movie.MovieCategory.SOCIAL},
+                {Movie.MovieCategory.SOCIAL}
         };
         int duration[] = {
                 120, 120, 120, 120, 120
@@ -132,7 +139,7 @@ public final class MovieList {
                 new String[]{"english", "spanish"},
                 new String[]{"english", "spanish"},
                 seasons,
-                new Movie.MovieCategory[]{Movie.MovieCategory.DRAMA},
+                new Movie.MovieCategory[]{Movie.MovieCategory.COMÈDIA},
                 0, // Duration isn't typically applicable to Series
                 Movie.MovieRating.PG,
                 2022

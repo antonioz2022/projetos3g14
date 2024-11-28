@@ -7,19 +7,29 @@ import java.io.Serializable;
  */
 public class Movie implements Serializable {
     public enum MovieCategory {
-        ACTION,
-        COMEDY,
-        DRAMA,
-        HORROR,
-        ROMANCE,
-        DOCUMENTARY,
-        SCI_FI,   // Ficção científica
-        FANTASY,
-        THRILLER,
-        ANIMATION,
-        ADVENTURE,
-        MYSTERY
-    }
+        SOCIAL("Social"),
+        TECH("Tech"),
+        MUSICA("Musica"),
+        SCI_FI("Sci_fi"),
+        ATIVISMO("Ativismo"),
+        VEGANISMO("Veganismo"),
+        FEMINISMO("Feminismo"),   // Ficção científica
+        EDUCAÇÃO("Educação"),
+        ANIMAÇÂO("Animação"),
+        COMÈDIA("Comédia"),
+        RELIGIÃO("Religião"),
+        NATUREZA("Natureza"),
+        OCUPAÇÂO("Ocupação");
+        private  final String text;
+
+        MovieCategory(String text) {
+            this.text = text;
+        }
+
+        public String getText() {
+            return text;
+        }
+    };
 
     public enum MovieRating {
         G("General Audience"),
