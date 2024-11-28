@@ -2,13 +2,13 @@
 
     <!-- Tema principal do aplicativo -->
     <style name="Theme.LibrefixTvAndroid" parent="@style/Theme.Leanback">
-        <item name="android:background">@color/background_dark</item>
+        <item name="android:background">#000000</item>
     </style>
 
     <!-- Estilo para o título do filme -->
     <style name="MovieTitleStyle">
         <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@color/text_white</item>
+        <item name="android:textColor">#FFFFFF</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginBottom">8dp</item>
     </style>
@@ -16,15 +16,15 @@
     <!-- Estilo para a sinopse do filme -->
     <style name="MovieDescriptionStyle">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/text_white</item>
+        <item name="android:textColor">#FFFFFF</item>
         <item name="android:lineSpacingExtra">4dp</item>
         <item name="android:layout_marginBottom">16dp</item>
     </style>
 
     <!-- Estilo para botões -->
     <style name="ActionButtonStyle">
-        <item name="android:backgroundTint">@color/button_background</item>
-        <item name="android:textColor">@color/button_text</item>
+        <item name="android:backgroundTint">#1E1E1E</item>
+        <item name="android:textColor">#FFFFFF</item>
         <item name="android:padding">12dp</item>
         <item name="android:layout_marginEnd">8dp</item>
         <item name="android:layout_marginBottom">16dp</item>
@@ -34,7 +34,7 @@
     <style name="RelatedMoviesHeaderStyle">
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/highlight_blue</item>
+        <item name="android:textColor">#00B4D8</item>
         <item name="android:layout_marginBottom">8dp</item>
     </style>
 
