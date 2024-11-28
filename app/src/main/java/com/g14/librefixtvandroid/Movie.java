@@ -1,13 +1,10 @@
 package com.g14.librefixtvandroid;
 
 import java.io.Serializable;
-import java.util.List;
 
 /*
- * Movie class represents video entity with title, description, image thumbs and video url.
+ * Classe Movie representa uma entidade de vídeo com título, descrição, imagens e URL de vídeo.
  */
-
-
 public class Movie implements Serializable {
     public enum MovieCategory {
         ACTION,
@@ -56,6 +53,7 @@ public class Movie implements Serializable {
     private String studio;
     private String[] languages;
     private String[] subtitles;
+    private boolean isWatched; // Novo campo para indicar se o filme foi assistido
 
     public Movie() {
     }
@@ -74,6 +72,7 @@ public class Movie implements Serializable {
         this.duration = duration;
         this.rating = rating;
         this.release_year = release_year;
+        this.isWatched = false;
     }
 
     public long getId() {
@@ -87,6 +86,7 @@ public class Movie implements Serializable {
     public void setRelease_year(int release_year){
         this.release_year = release_year;
     }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -179,6 +179,14 @@ public class Movie implements Serializable {
         this.cardImageUrl = cardImageUrl;
     }
 
+    public boolean isWatched() {
+        return isWatched;
+    }
+
+    public void setWatched(boolean watched) {
+        this.isWatched = watched;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -192,7 +200,8 @@ public class Movie implements Serializable {
                 ", categories=" + getCategories() +
                 ", duration=" + getDuration() + " minutes" +
                 ", rating=" + (rating != null ? rating + " (" + rating.getDescription() + ")" : "Not Rated") +
-                ", release_year=" + getRelease_year()+
+                ", release_year=" + getRelease_year() +
+                ", isWatched=" + isWatched +
                 '}';
     }
 }

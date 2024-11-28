@@ -2,6 +2,7 @@ package com.g14.librefixtvandroid;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.graphics.drawable.Drawable;
@@ -41,19 +42,17 @@ import com.bumptech.glide.request.transition.Transition;
 import java.util.Collections;
 import java.util.List;
 
-/*
- * LeanbackDetailsFragment extends DetailsFragment, a Wrapper fragment for leanback details screens.
- * It shows a detailed view of video and its meta plus related videos.
- */
 public class VideoDetailsFragment extends DetailsSupportFragment {
     private static final String TAG = "VideoDetailsFragment";
+    private static final String PREFS_NAME = "MoviePrefs";
+    private static final String PREF_WATCHED_KEY = "Watched_";
 
     private static final int ACTION_WATCH_TRAILER = 1;
     private static final int ACTION_SEASONS = 2;
+    private static final int ACTION_WATCHED = 3;
 
     private static final int DETAIL_THUMB_WIDTH = 674;
     private static final int DETAIL_THUMB_HEIGHT = 674;
-
     private static final int NUM_COLS = 10;
 
     private Movie mSelectedMovie;
@@ -70,9 +69,10 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
 
         mDetailsBackground = new DetailsSupportFragmentBackgroundController(this);
 
-        mSelectedMovie =
-                (Movie) getActivity().getIntent().getSerializableExtra(DetailsActivity.MOVIE);
+        mSelectedMovie = (Movie) getActivity().getIntent().getSerializableExtra(DetailsActivity.MOVIE);
         if (mSelectedMovie != null) {
+            mSelectedMovie.setWatched(loadWatchedState(mSelectedMovie.getId()));
+
             mPresenterSelector = new ClassPresenterSelector();
             mAdapter = new ArrayObjectAdapter(mPresenterSelector);
             setupDetailsOverviewRow();
@@ -105,12 +105,11 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
     }
 
     private void setupDetailsOverviewRow() {
-        Log.d(TAG, "doInBackground: " + mSelectedMovie.toString());
         final DetailsOverviewRow row = new DetailsOverviewRow(mSelectedMovie);
-        row.setImageDrawable(
-                ContextCompat.getDrawable(getActivity(), R.drawable.default_background));
+        row.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.default_background));
         int width = convertDpToPixel(getActivity().getApplicationContext(), DETAIL_THUMB_WIDTH);
         int height = convertDpToPixel(getActivity().getApplicationContext(), DETAIL_THUMB_HEIGHT);
+
         Glide.with(getActivity())
                 .load(mSelectedMovie.getCardImageUrl())
                 .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners(
@@ -120,44 +119,37 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
                     @Override
                     public void onResourceReady(@NonNull Drawable drawable,
                                                 @Nullable Transition<? super Drawable> transition) {
-                        Log.d(TAG, "details overview card image url ready: " + drawable);
                         row.setImageDrawable(drawable);
                         mAdapter.notifyArrayItemRangeChanged(0, mAdapter.size());
                     }
                 });
 
-
         ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
 
         if (mSelectedMovie instanceof Series) {
-            actionAdapter.add(
-                    new Action(
-                            ACTION_SEASONS,
-                            getResources().getString(R.string.seasons)));
+            actionAdapter.add(new Action(ACTION_SEASONS, getResources().getString(R.string.seasons)));
+        } else {
+            actionAdapter.add(new Action(ACTION_WATCH_TRAILER, getResources().getString(R.string.watch)));
         }
-        else{
-            actionAdapter.add(
-                    new Action(
-                            ACTION_WATCH_TRAILER,
-                            getResources().getString(R.string.watch)));
-        }
-        row.setActionsAdapter(actionAdapter);
 
+        // Crie a ação para "assistido" com o ícone apropriado, se necessário
+        Action watchedAction = new Action(ACTION_WATCHED, getResources().getString(R.string.mark_as_watched));
+        if (mSelectedMovie.isWatched()) {
+            watchedAction.setIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_check));
+        }
+        actionAdapter.add(watchedAction);
+
+        row.setActionsAdapter(actionAdapter);
         mAdapter.add(row);
     }
 
     private void setupDetailsOverviewRowPresenter() {
-        // Set detail background.
         FullWidthDetailsOverviewRowPresenter detailsPresenter =
                 new FullWidthDetailsOverviewRowPresenter(new DetailsDescriptionPresenter());
-        detailsPresenter.setBackgroundColor(
-                ContextCompat.getColor(getActivity(), R.color.default_background));
+        detailsPresenter.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.default_background));
 
-        // Hook up transition element.
-        FullWidthDetailsOverviewSharedElementHelper sharedElementHelper =
-                new FullWidthDetailsOverviewSharedElementHelper();
-        sharedElementHelper.setSharedElementEnterTransition(
-                getActivity(), DetailsActivity.SHARED_ELEMENT_NAME);
+        FullWidthDetailsOverviewSharedElementHelper sharedElementHelper = new FullWidthDetailsOverviewSharedElementHelper();
+        sharedElementHelper.setSharedElementEnterTransition(getActivity(), DetailsActivity.SHARED_ELEMENT_NAME);
         detailsPresenter.setListener(sharedElementHelper);
         detailsPresenter.setParticipatingEntranceTransition(true);
 
@@ -168,11 +160,23 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
                     Intent intent = new Intent(getActivity(), PlaybackActivity.class);
                     intent.putExtra(DetailsActivity.MOVIE, mSelectedMovie);
                     startActivity(intent);
+                } else if (action.getId() == ACTION_WATCHED) {
+                    boolean newWatchedState = !mSelectedMovie.isWatched();
+                    mSelectedMovie.setWatched(newWatchedState);
+                    saveWatchedState(mSelectedMovie.getId(), newWatchedState);
+
+                    if (newWatchedState) {
+                        action.setIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_check));
+                    } else {
+                        action.setIcon(null);
+                    }
+                    mAdapter.notifyArrayItemRangeChanged(0, mAdapter.size());
                 } else {
                     Toast.makeText(getActivity(), action.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
         mPresenterSelector.addClassPresenter(DetailsOverviewRow.class, detailsPresenter);
     }
 
@@ -189,6 +193,18 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
         HeaderItem header = new HeaderItem(0, subcategories[0]);
         mAdapter.add(new ListRow(header, listRowAdapter));
         mPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
+    }
+
+    private void saveWatchedState(long movieId, boolean isWatched) {
+        SharedPreferences prefs = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(PREF_WATCHED_KEY + movieId, isWatched);
+        editor.apply();
+    }
+
+    private boolean loadWatchedState(long movieId) {
+        SharedPreferences prefs = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getBoolean(PREF_WATCHED_KEY + movieId, false);
     }
 
     private int convertDpToPixel(Context context, int dp) {
