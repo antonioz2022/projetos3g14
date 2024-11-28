@@ -1,3 +1,4 @@
+
 package com.g14.librefixtvandroid;
 
 import android.content.Context;
@@ -28,7 +29,6 @@ import androidx.leanback.widget.Row;
 import androidx.leanback.widget.RowPresenter;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
-
 import android.util.Log;
 import android.widget.Toast;
 
@@ -46,19 +46,18 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
     private static final String TAG = "VideoDetailsFragment";
     private static final String PREFS_NAME = "MoviePrefs";
     private static final String PREF_WATCHED_KEY = "Watched_";
+    private static final String PREF_FAVORITE_KEY = "Favorite_";
 
     private static final int ACTION_WATCH_TRAILER = 1;
     private static final int ACTION_SEASONS = 2;
     private static final int ACTION_WATCHED = 3;
-    private static final int ACTION_SHARE = 4;
-    private static final int ACTION_ADD_TO_FAVORITES = 5;
+    private static final int ACTION_FAVORITE = 4;
 
     private static final int DETAIL_THUMB_WIDTH = 674;
     private static final int DETAIL_THUMB_HEIGHT = 674;
     private static final int NUM_COLS = 10;
 
     private Movie mSelectedMovie;
-
     private ArrayObjectAdapter mAdapter;
     private ClassPresenterSelector mPresenterSelector;
 
@@ -66,14 +65,16 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "onCreate DetailsFragment");
         super.onCreate(savedInstanceState);
 
+        Log.d(TAG, "onCreate DetailsFragment");
         mDetailsBackground = new DetailsSupportFragmentBackgroundController(this);
 
         mSelectedMovie = (Movie) getActivity().getIntent().getSerializableExtra(DetailsActivity.MOVIE);
         if (mSelectedMovie != null) {
+            // Carregar estados de "assistido" e "favorito"
             mSelectedMovie.setWatched(loadWatchedState(mSelectedMovie.getId()));
+            mSelectedMovie.setFavorite(loadFavoriteState(mSelectedMovie.getId()));
 
             mPresenterSelector = new ClassPresenterSelector();
             mAdapter = new ArrayObjectAdapter(mPresenterSelector);
@@ -134,18 +135,19 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
             actionAdapter.add(new Action(ACTION_WATCH_TRAILER, getResources().getString(R.string.watch)));
         }
 
-        // Adiciona a ação de "Assistido"
+        // Ação para "assistido"
         Action watchedAction = new Action(ACTION_WATCHED, getResources().getString(R.string.mark_as_watched));
         if (mSelectedMovie.isWatched()) {
             watchedAction.setIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_check));
         }
         actionAdapter.add(watchedAction);
 
-        // Adiciona uma ação de "Compartilhar"
-        actionAdapter.add(new Action(ACTION_SHARE, getResources().getString(R.string.share)));
-
-        // Adiciona uma ação de "Adicionar aos Favoritos"
-        actionAdapter.add(new Action(ACTION_ADD_TO_FAVORITES, getResources().getString(R.string.add_to_favorites)));
+        // Ação para "favoritar", sempre disponível
+        Action favoriteAction = new Action(ACTION_FAVORITE, getResources().getString(R.string.fav));
+        if (mSelectedMovie.isFavorite()) {
+            favoriteAction.setIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_check));
+        }
+        actionAdapter.add(favoriteAction);
 
         row.setActionsAdapter(actionAdapter);
         mAdapter.add(row);
@@ -179,13 +181,17 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
                         action.setIcon(null);
                     }
                     mAdapter.notifyArrayItemRangeChanged(0, mAdapter.size());
-                } else if (action.getId() == ACTION_SHARE) {
-                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                    shareIntent.setType("text/plain");
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, "Confira este filme: " + mSelectedMovie.getTitle());
-                    startActivity(Intent.createChooser(shareIntent, "Compartilhar via"));
-                } else if (action.getId() == ACTION_ADD_TO_FAVORITES) {
-                    Toast.makeText(getActivity(), "Adicionado aos favoritos!", Toast.LENGTH_SHORT).show();
+                } else if (action.getId() == ACTION_FAVORITE) {
+                    boolean newFavoriteState = !mSelectedMovie.isFavorite();
+                    mSelectedMovie.setFavorite(newFavoriteState);
+                    saveFavoriteState(mSelectedMovie.getId(), newFavoriteState);
+
+                    if (newFavoriteState) {
+                        action.setIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_check));
+                    } else {
+                        action.setIcon(null);
+                    }
+                    mAdapter.notifyArrayItemRangeChanged(0, mAdapter.size());
                 } else {
                     Toast.makeText(getActivity(), action.toString(), Toast.LENGTH_SHORT).show();
                 }
@@ -220,6 +226,18 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
     private boolean loadWatchedState(long movieId) {
         SharedPreferences prefs = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getBoolean(PREF_WATCHED_KEY + movieId, false);
+    }
+
+    private void saveFavoriteState(long movieId, boolean isFavorite) {
+        SharedPreferences prefs = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(PREF_FAVORITE_KEY + movieId, isFavorite);
+        editor.apply();
+    }
+
+    private boolean loadFavoriteState(long movieId) {
+        SharedPreferences prefs = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getBoolean(PREF_FAVORITE_KEY + movieId, false);
     }
 
     private int convertDpToPixel(Context context, int dp) {

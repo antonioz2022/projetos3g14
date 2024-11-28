@@ -63,7 +63,8 @@ public class Movie implements Serializable {
     private String studio;
     private String[] languages;
     private String[] subtitles;
-    private boolean isWatched; // Novo campo para indicar se o filme foi assistido
+    private boolean isWatched;
+    private boolean isFavorite;
 
     public Movie() {
     }
@@ -197,6 +198,14 @@ public class Movie implements Serializable {
         this.isWatched = watched;
     }
 
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.isFavorite = favorite;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -212,6 +221,7 @@ public class Movie implements Serializable {
                 ", rating=" + (rating != null ? rating + " (" + rating.getDescription() + ")" : "Not Rated") +
                 ", release_year=" + getRelease_year() +
                 ", isWatched=" + isWatched +
+                ", isFavorite=" + isFavorite +
                 '}';
     }
 }
