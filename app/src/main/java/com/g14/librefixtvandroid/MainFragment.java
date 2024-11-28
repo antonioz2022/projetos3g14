@@ -36,6 +36,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
@@ -88,12 +89,14 @@ public class MainFragment extends BrowseSupportFragment {
 
         int i;
         for (i = 0; i < NUM_ROWS; i++) {
-            if (i != 0) {
-                Collections.shuffle(list);
-            }
             ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
-            for (int j = 0; j < NUM_COLS; j++) {
-                listRowAdapter.add(list.get(j % list.size()));
+            for (int j = 0; j < list.size(); j++) {
+                List<Movie.MovieCategory> categories = Arrays.asList(list.get(j).getCategories());
+                for (int c = 0; c < categories.size(); c++){
+                    if(categories.get(c).getText().equals(MovieList.MOVIE_CATEGORY[i])){
+                        listRowAdapter.add(list.get(j));
+                    }
+                }
             }
             HeaderItem header = new HeaderItem(i, MovieList.MOVIE_CATEGORY[i]);
             rowsAdapter.add(new ListRow(header, listRowAdapter));
