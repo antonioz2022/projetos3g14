@@ -133,7 +133,7 @@ public class MainFragment extends BrowseSupportFragment {
         setHeadersTransitionOnBackEnabled(true);
 
         // set fastLane (or headers) background color
-        setBrandColor(ContextCompat.getColor(getActivity(), R.color.default_background));
+        setBrandColor(ContextCompat.getColor(getActivity(), R.color.background_gradient_start));
         // set search icon color
         setSearchAffordanceColor(ContextCompat.getColor(getActivity(), R.color.fastlane_background));
     }
