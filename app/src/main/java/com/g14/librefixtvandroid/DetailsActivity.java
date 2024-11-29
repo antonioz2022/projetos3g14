@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -59,11 +60,11 @@ public class DetailsActivity extends FragmentActivity {
                     saveFavoriteState(movie.getId(), newFavoriteState);
 
                     // Update the button icon dynamically
-                    ImageButton actionButton = (ImageButton) view;
+                    Button actionButton = (Button) view;
                     if (newFavoriteState) {
-                        actionButton.setImageDrawable(ContextCompat.getDrawable(DetailsActivity.this, R.drawable.ic_check));
+                        actionButton.setText("Remover dos favoritos");
                     } else {
-                        actionButton.setImageDrawable(null);
+                        actionButton.setText("Adicionar aos favoritos");
                     }
                 } else {
                     // Log an error or show a message if movie is null
