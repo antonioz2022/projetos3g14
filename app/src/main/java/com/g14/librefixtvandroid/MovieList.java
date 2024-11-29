@@ -1,9 +1,5 @@
-package com.g14.librefixtvandroid;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public final class MovieList {
+package com.g14.librefixtvandroid;import java.util.ArrayList;
+import java.util.List;public final class MovieList {
     public static final String MOVIE_CATEGORY[] = {
             Movie.MovieCategory.SOCIAL.getText(),
             Movie.MovieCategory.TECH.getText(),
@@ -18,9 +14,7 @@ public final class MovieList {
             Movie.MovieCategory.RELIGIÃO.getText(),
             Movie.MovieCategory.NATUREZA.getText(),
             Movie.MovieCategory.OCUPAÇÂO.getText()
-    };
-
-    private static List<Movie> list;
+    };private static List<Movie> list;
     private static long count = 0;
 
     public static List<Movie> getList() {
@@ -73,10 +67,12 @@ public final class MovieList {
 
         String subtitles[][] = { {"english", "portuguese"}, {"english", "portuguese"},
                 {"english", "portuguese"}, {"english", "portuguese"}, {"english", "portuguese"}
+
         };
 
         String languages[][] = { {"english", "portuguese"}, {"english", "portuguese"},
                 {"english", "portuguese"}, {"english", "portuguese"}, {"english", "portuguese"}
+
         };
 
         Movie.MovieCategory categories[][] = {
@@ -175,26 +171,5 @@ public final class MovieList {
         movie.setRating(rating);
         movie.setRelease_year(release_year);
         return movie;
-    }
-
-    // Implementação dos métodos para obter filmes assistidos e favoritos
-    public static List<Movie> getWatchedMovies() {
-        List<Movie> watchedMovies = new ArrayList<>();
-        for (Movie movie : getList()) {
-            if (movie.isWatched()) {
-                watchedMovies.add(movie);
-            }
-        }
-        return watchedMovies;
-    }
-
-    public static List<Movie> getFavoriteMovies() {
-        List<Movie> favoriteMovies = new ArrayList<>();
-        for (Movie movie : getList()) {
-            if (movie.isFavorite()) {
-                favoriteMovies.add(movie);
-            }
-        }
-        return favoriteMovies;
     }
 }
