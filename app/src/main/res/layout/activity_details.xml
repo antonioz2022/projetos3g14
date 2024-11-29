@@ -8,14 +8,15 @@
     tools:context=".DetailsActivity"
     tools:deviceIds="tv">
 
-    <!-- Fundo da tela -->
+
+
     <ImageView
-        android:id="@+id/details_background"
+        android:id="@+id/details_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginBottom="16dp"
         android:scaleType="centerCrop"
-        android:contentDescription="Fundo da tela de detalhes"
-        android:src="@drawable/default_background" />
+        android:contentDescription="Imagem do pôster do filme" />
 
 
     <!-- Conteúdo principal -->
@@ -30,13 +31,9 @@
             android:orientation="vertical">
 
             <!-- Imagem do pôster do filme -->
-            <ImageView
-                android:id="@+id/details_image"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginBottom="16dp"
-                android:scaleType="centerCrop"
-                android:contentDescription="Imagem do pôster do filme" />
+           <View
+               android:layout_width="wrap_content"
+               android:layout_height="300dp"/>
 
             <!-- Título do filme -->
             <TextView
@@ -47,41 +44,57 @@
                 android:text="Título do Filme" />
 
             <!-- Descrição/Sinopse do filme -->
-            <TextView
-                android:id="@+id/details_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/MovieDescriptionStyle"
-                android:text="Sinopse do filme aparece aqui." />
+
 
             <!-- Ações (botões) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginBottom="16dp"
                 android:gravity="center"
-                android:layout_marginBottom="16dp">
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="250dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="70dp">
+
+                    <TextView
+                        android:id="@+id/details_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/MovieDescriptionStyle"
+                        android:textSize="12dp"
+                        android:text="Sinopse do filme aparece aqui." />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
 
                 <Button
                     android:id="@+id/action_watch"
+                    style="@style/ActionButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/ActionButtonStyle"
+                    android:layout_marginRight="300dp"
                     android:text="@string/watch" />
 
                 <Button
-                    android:id="@+id/action_share"
+                    android:id="@+id/action_watched"
+                    style="@style/ActionButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/ActionButtonStyle"
-                    android:text="@string/share" />
+                    android:text="@string/mark_as_watched" />
 
                 <Button
                     android:id="@+id/action_add_to_favorites"
+                    style="@style/ActionButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/ActionButtonStyle"
                     android:text="@string/add_to_favorites" />
+                </LinearLayout>
             </LinearLayout>
 
             <!-- Filmes relacionados -->

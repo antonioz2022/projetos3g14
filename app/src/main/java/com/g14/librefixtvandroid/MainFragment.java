@@ -207,6 +207,7 @@ public class MainFragment extends BrowseSupportFragment {
                                 ((ImageCardView) itemViewHolder.view).getMainImageView(),
                                 DetailsActivity.SHARED_ELEMENT_NAME)
                         .toBundle();
+
                 getActivity().startActivity(intent, bundle);
             } else if (item instanceof String) {
                 if (((String) item).contains(getString(R.string.error_fragment))) {
