@@ -10,16 +10,16 @@ public class Movie implements Serializable {
         SOCIAL("Social"),
         TECH("Tech"),
         MUSICA("Musica"),
-        SCI_FI("Sci_fi"),
-        ATIVISMO("Ativismo"),
-        VEGANISMO("Veganismo"),
-        FEMINISMO("Feminismo"),   // Ficção científica
+        FICÇÃO("Ficçãp"),
+        DOCS("Docs"),
+        NACIONAIS("Nacionais"),
+        FEMINISMO("Feminismo"),
         EDUCAÇÃO("Educação"),
         ANIMAÇÂO("Animação"),
         COMÈDIA("Comédia"),
         RELIGIÃO("Religião"),
         NATUREZA("Natureza"),
-        OCUPAÇÂO("Ocupação");
+        GUERRA("Guerra");
         private  final String text;
 
         MovieCategory(String text) {
