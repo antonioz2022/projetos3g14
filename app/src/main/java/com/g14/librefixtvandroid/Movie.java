@@ -14,7 +14,7 @@ public class Movie implements Serializable {
         DOCS("Docs"),
         NACIONAIS("Nacionais"),
         GUERRA("Guerra"),
-        SCI_FI("Sci_fi"),
+        SCI_FI("Sci-fi"),
         ATIVISMO("Ativismo"),
         VEGANISMO("Veganismo"),
         FEMINISMO("Feminismo"),   // Ficção científica
