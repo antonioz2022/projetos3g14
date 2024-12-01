@@ -18,7 +18,10 @@ O projeto busca trazer o Libreflix para Android TV, oferecendo uma versão otimi
 - **Luiz Felipe Pessoa de Arruda** - [lfpa@cesar.school](mailto:lfpa@cesar.school)
 
 ### 🖌️ Designers
-
+- **Rafael Ferreiral** - [rbf@cesar.school](mailto:rbf@cesar.school)
+- **Luiz Felipe Teixeira** - [lftm@cesar.school](mailto:lftm@cesar.school)
+- **Lucas Souto** - [lpsc@cesar.school](mailto:lpsc@cesar.school)
+- **Henrique Notare** - [hnfc@cesar.school](mailto:hnfc@cesar.school)
 ## :link: Links
 
 
